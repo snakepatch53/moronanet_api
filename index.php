@@ -6,7 +6,11 @@ $router = new \Bramus\Router\Router();
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-$router->get('/whatsapp_api/{number}/{message}/{pass}', function ($number, $message, $pass) {
+$router->get('/', function () {
+    include('./pages/api_info.php');
+});
+
+$router->get('/whatsapp/{number}/{message}/{pass}', function ($number, $message, $pass) {
     include('./services/whatsapp_api.php');
 });
 
