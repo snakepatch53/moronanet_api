@@ -17,7 +17,7 @@
                 <h3 class="my-4">GET</h3>
                 <div class="px-3">
                     <h4>Enviar mensajes por whatsapp</h4>
-                    <h5>https://api.moronanet.com/whatsapp<span class="text-secondary">{NUMERO_DE_CELULAR}</span>/<span class="text-secondary">{MENSAJE}</span>/<span class="text-secondary">{TOKEN}</span></h5>
+                    <h5>https://api.moronanet.com/whatsapp/<span class="text-secondary">{NUMERO_DE_CELULAR}</span>/<span class="text-secondary">{MENSAJE}</span>/<span class="text-secondary">{TOKEN}</span></h5>
                     <h5 class="text-secondary">PARAMETROS: </h5>
                     <ul>
                         <li><span class="text-secondary">{NUMERO_DE_CELULAR}</span> Numero de celular del receptor.</li>
