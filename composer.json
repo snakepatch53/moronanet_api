@@ -1,0 +1,19 @@
+{
+    "name": "harold/moronanet_api",
+    "autoload": {
+        "psr-4": {
+            "Harold\\MoronanetApi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "snakepatch53",
+            "email": "snakepatch53@gmail.com"
+        }
+    ],
+    "require": {
+        "twilio/sdk": "^6.44",
+        "vlucas/phpdotenv": "^5.5",
+        "bramus/router": "~1.6"
+    }
+}
