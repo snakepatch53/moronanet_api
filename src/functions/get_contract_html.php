@@ -268,6 +268,7 @@ function getPage1(array $data_head, array $data_header, array $data_business, ar
                 <td><b>SI: </b></td>
                 <td rowspan="3" style="text-align:center">
                     <img style="width:120px; margin-top:4px" src="data:image/png;base64,<?= base64_encode(file_get_contents("https://api.moronanet.com/qrcode/location/" . str_replace(' ', '', $data_client['ubicacion']) . "/z2phE7KCXLC2YLgt")) ?>" />
+
                 </td>
             </tr>
             <tr>
