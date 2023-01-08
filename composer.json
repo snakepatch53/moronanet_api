@@ -15,6 +15,7 @@
         "twilio/sdk": "^6.44",
         "vlucas/phpdotenv": "^5.5",
         "bramus/router": "~1.6",
-        "endroid/qr-code": "^4.7"
+        "endroid/qr-code": "^4.7",
+        "dompdf/dompdf": "^2.0"
     }
 }
