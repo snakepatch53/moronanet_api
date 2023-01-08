@@ -14,6 +14,10 @@ $router->get('/whatsapp/{number}/{message}/{pass}', function ($number, $message,
     include('./services/whatsapp_api.php');
 });
 
+$router->get('/qrcode/{text}/{pass}', function ($text, $pass) {
+    include('./services/qrcode_api.php');
+});
+
 $router->set404(function () {
     header('HTTP/1.1 404 Not Found');
     echo "Tu estas loco aqui no hay nada";
