@@ -267,9 +267,7 @@ function getPage1(array $data_head, array $data_header, array $data_business, ar
                 <td colspan="4" rowspan="2">¿El abonado es de la tercera edad o discapacitado? (En caso afirmativo,aplica tarifa preferencial de acuerdo al plan del prestador):</td>
                 <td><b>SI: </b></td>
                 <td rowspan="3" style="text-align:center">
-                    <!-- <img style="width:120px; margin-top:4px" src="data:image/png;base64,<?= base64_encode(file_get_contents(((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://") . $_SERVER['SERVER_NAME'] . "/qrcode/location/" . str_replace(' ', '', $data_client['ubicacion']) . "/z2phE7KCXLC2YLgt")) ?>" /> -->
-                    <img style="width:120px; margin-top:4px" src="data:image/png;base64,<?= base64_encode(file_get_contents("/qrcode/location/" . str_replace(' ', '', $data_client['ubicacion']) . "/z2phE7KCXLC2YLgt")) ?>" />
-                    <!-- <img style="width:120px; margin-top:4px" src="data:image/png;base64,<?= base64_encode(file_get_contents("http://localhost/moronanet_api/qrcode/location/-0.106930,20-78.470934/z2phE7KCXLC2YLgt")) ?>" /> -->
+                    <img style="width:120px; margin-top:4px" src="data:image/png;base64,<?= base64_encode(file_get_contents("https://api.moronanet.com/qrcode/location/" . str_replace(' ', '', $data_client['ubicacion']) . "/z2phE7KCXLC2YLgt")) ?>" />
                 </td>
             </tr>
             <tr>

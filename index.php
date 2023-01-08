@@ -16,7 +16,6 @@ $router->get('/whatsapp/{number}/{message}/{pass}', function ($number, $message,
 
 $router->get('/qrcode/location/{text}/{pass}', function ($text, $pass) {
     include('./src/services/qrcode_api.location.php');
-    // echo ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://") . $_SERVER['SERVER_NAME'] . "/qrcode/location/";
 });
 
 $router->get('/qrcode/{text}/{pass}', function ($text, $pass) {
@@ -25,9 +24,7 @@ $router->get('/qrcode/{text}/{pass}', function ($text, $pass) {
 
 
 $router->get('/contract/{cliente_id}/{pass}', function ($cliente_id, $pass) {
-    // echo "<img src='/qrcode/location/-0.106930,20-78.470934/z2phE7KCXLC2YLgt' />";
-    echo __DIR__;
-    // include('./src/services/contract_api.php');
+    include('./src/services/contract_api.php');
 });
 
 $router->set404(function () {
