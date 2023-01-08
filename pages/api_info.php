@@ -36,7 +36,7 @@
                 </div>
                 <div class="px-3">
                     <h4 class="text-success mt-5">Convertir Ubicacion de google maps a codigo QR</h4>
-                    <h5>https://api.moronanet.com/qrcode/<span class="text-secondary">{UBICACION}</span>/<span class="text-secondary">{TOKEN}</span></h5>
+                    <h5>https://api.moronanet.com/qrcode/location/<span class="text-secondary">{UBICACION}</span>/<span class="text-secondary">{TOKEN}</span></h5>
                     <h5 class="text-secondary">PARAMETROS: </h5>
                     <ul>
                         <li><span class="text-secondary">{UBICACION}</span> Ubicacion que desea convertir en enlace de codigo qr.</li>
