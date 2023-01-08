@@ -15,6 +15,7 @@ function get_contract_html(
 ) {
     $data_head = array(
         'img_route' => './public/img/',
+        'root' => (isset($_SERVER['HTTPS']) ? ('../../') : ("http://localhost/" . explode("/", $_SERVER['REQUEST_URI'])[1] . "/")),
         'dato_codigo' => $client_id, // dato1
         'dato_version' => '01',
         'dato_fecha' => formatDate($client_fecha) //dato2
@@ -267,7 +268,10 @@ function getPage1(array $data_head, array $data_header, array $data_business, ar
                 <td colspan="4" rowspan="2">¿El abonado es de la tercera edad o discapacitado? (En caso afirmativo,aplica tarifa preferencial de acuerdo al plan del prestador):</td>
                 <td><b>SI: </b></td>
                 <td rowspan="3" style="text-align:center">
-                    <img style="width:120px; margin-top:4px" src="data:image/png;base64,<?= base64_encode(file_get_contents("https://api.moronanet.com/qrcode/location/" . str_replace(' ', '', $data_client['ubicacion']) . "/z2phE7KCXLC2YLgt")) ?>" />
+                    <img style="width:120px; margin-top:4px" src="data:image/png;base64,<?= base64_encode(file_get_contents($data_head['root'] . "qrcode/location/" . str_replace(' ', '', $data_client['ubicacion']) . "/z2phE7KCXLC2YLgt")) ?>" />
+                    <!-- <?= $data_head['root'] . "qrcode/location/" . str_replace(' ', '', $data_client['ubicacion']) . "/z2phE7KCXLC2YLgt" ?> -->
+                    <!-- <img style="width:120px; margin-top:4px" src="data:image/png;base64,<?= base64_encode(file_get_contents("http://localhost/moronanet_api/qrcode/location/" . str_replace(' ', '', $data_client['ubicacion']) . "/z2phE7KCXLC2YLgt")) ?>" /> -->
+                    <!-- <img style="width:120px; margin-top:4px" src="data:image/png;base64,<?= base64_encode(file_get_contents("http://localhost/moronanet_api/qrcode/location/" . str_replace(' ', '', $data_client['ubicacion']) . "/z2phE7KCXLC2YLgt")) ?>" /> -->
 
                 </td>
             </tr>
