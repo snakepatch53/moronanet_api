@@ -14,6 +14,10 @@ $router->get('/whatsapp/{number}/{message}/{pass}', function ($number, $message,
     include('./services/whatsapp_api.php');
 });
 
+$router->get('/qrcode/location/{text}/{pass}', function ($text, $pass) {
+    include('./services/qrcode_api.location.php');
+});
+
 $router->get('/qrcode/{text}/{pass}', function ($text, $pass) {
     include('./services/qrcode_api.php');
 });

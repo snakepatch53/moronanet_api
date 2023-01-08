@@ -9,14 +9,14 @@
     <title>Moronanet API</title>
 </head>
 
-<body>
-    <div class="container">
+<body class="container d-flex justify-content-center">
+    <div>
         <h2 class="text-primary text-center mt-5">GUIA API MORONANET</h2>
         <div class="section mt-5">
             <div class="my-4">
                 <h3 class="my-4">GET</h3>
                 <div class="px-3">
-                    <h4>Enviar mensajes por whatsapp</h4>
+                    <h4 class="text-success mt-5">Enviar mensajes por whatsapp</h4>
                     <h5>https://api.moronanet.com/whatsapp/<span class="text-secondary">{NUMERO_DE_CELULAR}</span>/<span class="text-secondary">{MENSAJE}</span>/<span class="text-secondary">{TOKEN}</span></h5>
                     <h5 class="text-secondary">PARAMETROS: </h5>
                     <ul>
@@ -26,11 +26,20 @@
                     </ul>
                 </div>
                 <div class="px-3">
-                    <h4>Convertir texto a codigo QR</h4>
+                    <h4 class="text-success mt-5">Convertir texto a codigo QR</h4>
                     <h5>https://api.moronanet.com/qrcode/<span class="text-secondary">{TEXTO}</span>/<span class="text-secondary">{TOKEN}</span></h5>
                     <h5 class="text-secondary">PARAMETROS: </h5>
                     <ul>
                         <li><span class="text-secondary">{TEXTO}</span> Texto que desea representar en el codigo qr.</li>
+                        <li><span class="text-secondary">{TOKEN}</span> Clave de autorizacion de la API.</li>
+                    </ul>
+                </div>
+                <div class="px-3">
+                    <h4 class="text-success mt-5">Convertir Ubicacion de google maps a codigo QR</h4>
+                    <h5>https://api.moronanet.com/qrcode/<span class="text-secondary">{UBICACION}</span>/<span class="text-secondary">{TOKEN}</span></h5>
+                    <h5 class="text-secondary">PARAMETROS: </h5>
+                    <ul>
+                        <li><span class="text-secondary">{UBICACION}</span> Ubicacion que desea convertir en enlace de codigo qr.</li>
                         <li><span class="text-secondary">{TOKEN}</span> Clave de autorizacion de la API.</li>
                     </ul>
                 </div>

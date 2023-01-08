@@ -15,7 +15,7 @@ use Endroid\QrCode\Writer\PngWriter;
 $result = Builder::create()
     ->writer(new PngWriter())
     ->writerOptions([])
-    ->data($text)
+    ->data("https://www.google.com.ec/maps/place/" . str_replace(' ', '', $text))
     ->encoding(new Encoding('UTF-8'))
     ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
     ->size(300)
