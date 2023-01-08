@@ -269,9 +269,6 @@ function getPage1(array $data_head, array $data_header, array $data_business, ar
                 <td><b>SI: </b></td>
                 <td rowspan="3" style="text-align:center">
                     <img style="width:120px; margin-top:4px" src="data:image/png;base64,<?= base64_encode(file_get_contents($data_head['root'] . "qrcode/location/" . str_replace(' ', '', $data_client['ubicacion']) . "/z2phE7KCXLC2YLgt")) ?>" />
-                    <!-- <?= $data_head['root'] . "qrcode/location/" . str_replace(' ', '', $data_client['ubicacion']) . "/z2phE7KCXLC2YLgt" ?> -->
-                    <!-- <img style="width:120px; margin-top:4px" src="data:image/png;base64,<?= base64_encode(file_get_contents("http://localhost/moronanet_api/qrcode/location/" . str_replace(' ', '', $data_client['ubicacion']) . "/z2phE7KCXLC2YLgt")) ?>" /> -->
-                    <!-- <img style="width:120px; margin-top:4px" src="data:image/png;base64,<?= base64_encode(file_get_contents("http://localhost/moronanet_api/qrcode/location/" . str_replace(' ', '', $data_client['ubicacion']) . "/z2phE7KCXLC2YLgt")) ?>" /> -->
 
                 </td>
             </tr>
