@@ -52,6 +52,15 @@
                         <li><span class="text-secondary">{TOKEN}</span> Clave de autorizacion de la API.</li>
                     </ul>
                 </div>
+                <div class="px-3">
+                    <h4 class="text-success mt-5">Generar ficha de revision tecnia a clientes Moronanet</h4>
+                    <h5>https://api.moronanet.com/technical_review/<span class="text-secondary">{CLIENTE_ID}</span>/<span class="text-secondary">{TOKEN}</span></h5>
+                    <h5 class="text-secondary">PARAMETROS: </h5>
+                    <ul>
+                        <li><span class="text-secondary">{CLIENTE_ID}</span> Identificador unico del cliente en Mikrowisp.</li>
+                        <li><span class="text-secondary">{TOKEN}</span> Clave de autorizacion de la API.</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
