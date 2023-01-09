@@ -1,6 +1,6 @@
 <?php
 require './src/functions/mikrowisp.php';
-require './src/functions/get_contract_html.php';
+require './src/functions/get_technical_review_html.php';
 include('./src/functions/http_query.php');
 
 use Dompdf\Dompdf;
@@ -9,7 +9,7 @@ $client = getClient($cliente_id);
 if ($client != false) {
     $address_fields = ["paroquia", "sector", "ciudad"];
     $client_address = $client['direccion_principal'];
-    $html = get_contract_html(
+    $html = get_technical_review_html(
         $client['id'],
         capitalizeStr($client['servicio']['instalado']),
         capitalizeStr($client['nombre']),
@@ -19,6 +19,7 @@ if ($client != false) {
         getField($client_address, $address_fields, "sector", "macas"),
         getField($client_address, $address_fields, "ciudad", "macas"),
         capitalizeStr(getPlan($client['servicio']['perfil'])),
+        capitalizeStr($client['servicio']['ip']),
         capitalizeStr($client['servicio']['coordenadas']),
         $client['servicio']['costo'],
         $client['movil']

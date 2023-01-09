@@ -12,20 +12,28 @@ $router->get('/', function () {
 });
 
 $router->get('/whatsapp/{number}/{message}/{pass}', function ($number, $message, $pass) {
+    include('./src/functions/middleware_auth.php'); //auth
     include('./src/services/whatsapp_api.php');
 });
 
 $router->get('/qrcode/location/{text}/{pass}', function ($text, $pass) {
+    include('./src/functions/middleware_auth.php'); //auth
     include('./src/services/qrcode_api.location.php');
 });
 
 $router->get('/qrcode/{text}/{pass}', function ($text, $pass) {
+    include('./src/functions/middleware_auth.php'); //auth
     include('./src/services/qrcode_api.php');
 });
 
-
 $router->get('/contract/{cliente_id}/{pass}', function ($cliente_id, $pass) {
+    include('./src/functions/middleware_auth.php'); //auth
     include('./src/services/contract_api.php');
+});
+
+$router->get('/technical_review/{cliente_id}/{pass}', function ($cliente_id, $pass) {
+    include('./src/functions/middleware_auth.php'); //auth
+    include('./src/services/technical_review_api.php');
 });
 
 $router->set404(function () {
