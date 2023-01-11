@@ -62,6 +62,20 @@
                     </ul>
                 </div>
             </div>
+            <div class="my-4">
+                <h3 class="my-4">CHROME EXTENSIONS</h3>
+                <div class="px-3">
+                    <h4 class="text-success mt-5">Inserta botones de "Imprimir" contratos e "Imprimir" Ficha de revision tecnica</h4>
+                    <h5><a href="./public/src/moronanet_contracts.rar">moronanet_contracts.rar</a></h5>
+                    <ol>
+                        <li>Descomprimir el archivo.</li>
+                        <li>Menu chrome, abrir "Mas herramientas > extensiones".</li>
+                        <li>Activar modo desarrollador.</li>
+                        <li>Cargar descomprimida.</li>
+                        <li>Seleccionar el archivo.</li>
+                    </ol>
+                </div>
+            </div>
         </div>
     </div>
 </body>
