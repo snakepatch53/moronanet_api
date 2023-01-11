@@ -12,8 +12,9 @@
 <body class="container d-flex justify-content-center">
     <div>
         <h2 class="text-primary text-center mt-5">GUIA API MORONANET</h2>
-        <div class="section mt-5">
-            <div class="my-4">
+        <div class="section mt-1">
+            <br>
+            <div class="mb-5">
                 <h3 class="my-4">GET</h3>
                 <div class="px-3">
                     <h4 class="text-success mt-5">Enviar mensajes por whatsapp</h4>
@@ -62,7 +63,8 @@
                     </ul>
                 </div>
             </div>
-            <div class="my-4">
+            <br>
+            <div class="mb-5">
                 <h3 class="my-4">CHROME EXTENSIONS</h3>
                 <div class="px-3">
                     <h4 class="text-success mt-5">Inserta botones de "Imprimir" contratos e "Imprimir" Ficha de revision tecnica</h4>
