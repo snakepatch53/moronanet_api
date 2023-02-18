@@ -11,6 +11,8 @@ function get_contract_html(
     string $client_ciudad,
     string $client_plan,
     string $client_ubicacion,
+    string $client_pppuser,
+    string $client_ppppass,
     float $client_costo,
     string $client_telefono
 ) {
@@ -37,6 +39,8 @@ function get_contract_html(
         "parroquia" => $client_parroquia, //dato7
         "plan" => $client_plan, //dato4
         "ubicacion" => $client_ubicacion, //dato4
+        "pppuser" => $client_pppuser, //dato4
+        "ppppass" => $client_ppppass, //dato4
         "canton" => "Morona",
         "sector" => $client_sector,
         "valor_mensual" => $client_costo, //dato5
@@ -264,10 +268,14 @@ function getPage1(array $data_head, array $data_header, array $data_business, ar
                 <td><?= $data_client['nacionalidad'] ?></td>
             </tr>
             <tr>
-                <td colspan="4" rowspan="2">¿El abonado es de la tercera edad o discapacitado? (En caso afirmativo,aplica tarifa preferencial de acuerdo al plan del prestador):</td>
+                <td colspan="3" rowspan="2">¿El abonado es de la tercera edad o discapacitado? (En caso afirmativo,aplica tarifa preferencial de acuerdo al plan del prestador):</td>
                 <td><b>SI: </b></td>
                 <td rowspan="3" style="text-align:center">
-                    <img style="width:120px; margin-top:4px" src="data:image/png;base64,<?= qrcode_location($data_client['ubicacion']) ?>" />
+                    <img style="width:65px; margin-top:4px" src="data:image/png;base64,<?= qrcode_PPPoE($data_client['pppuser'], "user") ?>" />
+                    <img style="width:65px; margin-top:4px" src="data:image/png;base64,<?= qrcode_PPPoE($data_client['ppppass'], "pass") ?>" />
+                </td>
+                <td rowspan="3" style="text-align:center">
+                    <img style="width:140px; margin-top:4px" src="data:image/png;base64,<?= qrcode_location($data_client['ubicacion']) ?>" />
                 </td>
             </tr>
             <tr>
@@ -275,7 +283,7 @@ function getPage1(array $data_head, array $data_header, array $data_business, ar
             </tr>
             <tr>
                 <td><b>Direccion: </b></td>
-                <td colspan="4"><?= $data_client['direccion'] ?></td>
+                <td colspan="3"><?= $data_client['direccion'] ?></td>
             </tr>
             <tr>
                 <td><b>Provincia: </b></td>

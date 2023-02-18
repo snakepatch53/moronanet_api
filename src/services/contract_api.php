@@ -20,6 +20,8 @@ if ($client != false) {
         getField($client_address, $address_fields, "ciudad", "macas"),
         capitalizeStr(getPlan($client['servicio']['perfil'])),
         capitalizeStr($client['servicio']['coordenadas']),
+        capitalizeStr($client['servicio']['pppuser']),
+        capitalizeStr($client['servicio']['ppppass']),
         $client['servicio']['costo'],
         $client['movil']
     );

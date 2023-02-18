@@ -1,7 +1,6 @@
 <?php
 function getClient($cliente_id)
 {
-
     $client = http_query($_ENV['MIKROWISP_API_URL'] . '/GetClientsDetails', 'POST', array(
         "token" => $_ENV['MIKROWISP_API_TOKEN'],
         "idcliente" => $cliente_id
