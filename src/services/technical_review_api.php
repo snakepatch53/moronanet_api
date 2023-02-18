@@ -21,6 +21,8 @@ if ($client != false) {
         capitalizeStr(getPlan($client['servicio']['perfil'])),
         capitalizeStr($client['servicio']['ip']),
         capitalizeStr($client['servicio']['coordenadas']),
+        capitalizeStr($client['servicio']['pppuser']),
+        capitalizeStr($client['servicio']['ppppass']),
         $client['servicio']['costo'],
         $client['movil']
     );

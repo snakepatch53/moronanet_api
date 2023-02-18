@@ -11,6 +11,8 @@ function get_technical_review_html(
     string $client_plan,
     string $client_ip,
     string $client_ubicacion,
+    string $client_pppuser,
+    string $client_ppppass,
     float $client_costo,
     string $client_telefono
 ) {
@@ -38,6 +40,8 @@ function get_technical_review_html(
         "plan" => $client_plan, //dato4
         "ip" => $client_ip, //dato4
         "ubicacion" => $client_ubicacion, //dato4
+        "pppuser" => $client_pppuser, //dato4
+        "ppppass" => $client_ppppass, //dato4
         "canton" => "Morona",
         "sector" => $client_sector,
         "valor_mensual" => round($client_costo + ($client_costo * 0.12)), //dato5
@@ -228,8 +232,8 @@ function getPage1(array $data_head, array $data_header, array $data_business, ar
                 <td><b>Celular:</b></td>
                 <td><?= $data_client['telefono'] ?></td>
                 <td rowspan="3">
-                    <center><img style="width:65px; margin-top:8px" src="data:image/png;base64,<?= qrcode_PPPoE($data_client['ubicacion'], "user") ?>" /></center>
-                    <center><img style="width:65px; margin-top:8px" src="data:image/png;base64,<?= qrcode_PPPoE($data_client['ubicacion'], "pass") ?>" /></center>
+                    <center><img style="width:65px; margin-top:8px" src="data:image/png;base64,<?= qrcode_PPPoE($data_client['pppuser'], "user") ?>" /></center>
+                    <center><img style="width:65px; margin-top:8px" src="data:image/png;base64,<?= qrcode_PPPoE($data_client['ppppass'], "pass") ?>" /></center>
                 </td>
                 <td rowspan="3">
                     <center><img style="width:140px; margin-top:8px" src="data:image/png;base64,<?= qrcode_location($data_client['ubicacion']) ?>" /></center>
