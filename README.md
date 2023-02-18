@@ -2,14 +2,14 @@
 
 ```env
     # Parametros de twilo (whatsapp api)
-    TWILIO_ACCOUNT_SID = "ACda6ad48f7a25a49be5606e4afef54568"
-    TWILIO_AUTH_TOKEN = "81101bf5fa956df83c0f7ac79fbfa62a"
-    TWILIO_WHATSAPP_NUMBER = "+14155238886"
+    TWILIO_ACCOUNT_SID = "{{TWILO_SID}}"
+    TWILIO_AUTH_TOKEN = "{{TWILO_TOKEN}}"
+    TWILIO_WHATSAPP_NUMBER = "{{TWILO_NUMBER}}"
 
     # contraseña para usar los servicios
-    SERVICE_AUTH_TOKEN = "z2phE7KCXLC2YLgt"
+    SERVICE_AUTH_TOKEN = "{{YOUR_AUTH_TOKEN}}"
 
     # Parametros para de api mikrowisp
-    MIKROWISP_API_URL = "http://167.71.189.123/api/v1/"
-    MIKROWISP_API_TOKEN = "MzBnNDBqa2NCTE53ZXBjVTZUMFljdz09"
+    MIKROWISP_API_URL = "{{YOUR_URL_API_MIKROWISP}}"
+    MIKROWISP_API_TOKEN = "{{YOR_TOKEN_MIKROWISP}}"
 ```
