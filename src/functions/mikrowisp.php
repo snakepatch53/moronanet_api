@@ -30,6 +30,7 @@ function getPlan(string $str_name)
     foreach ($planes as $key => $value) {
         if (str_contains($str_name, $value['num'])) return $value['name'];
     }
+    return "Unregistred";
 }
 
 function getField(string $w, array $fields, string $field, $default_field)
