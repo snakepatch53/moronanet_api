@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Guayaquil');
 function get_contract_html(
     int $client_id,
     string $client_fecha,
@@ -168,9 +169,8 @@ function getHeader(array $data, string $dato_hoja_num)
 #region page1
 function getPage1(array $data_head, array $data_header, array $data_business, array $data_client)
 {
-
     ob_start();
-
+    // get day from date
 ?>
     <?= getHeader($data_head, '1 de 7') ?>
     <style>
@@ -224,7 +224,7 @@ function getPage1(array $data_head, array $data_header, array $data_business, ar
         </table>
         <h5 style="text-align: center;">CONTRATO DE PRESTACIÓN DE SERVICIOS</h5>
         <h5 style="margin:0">CLAUSULA PRIMERA. - DATOS DE LOS COMPARECIENTES:</h5>
-        <p style="margin:0;">En la ciudad de Macas a los 09 días del mes de noviembre del año 2022 celebran el presente Contrato de Adhesión de prestación de Servicios de Acceso a Internet; por una parte, el Señor José Andrés Chacha Chuca, a quien mediante resolución del ARCOTEL expedida por la Agencia de Regulación y Control de las Telecomunicaciones otorgó el permiso para la prestación del servicio de acceso a internet, permiso suscrito el 07 de noviembre del 2019 e inscrito en el tomo a fojas 139-13997, del registro público de telecomunicaciones, los datos de detallan a continuación:</p>
+        <p style="margin:0;">En la ciudad de Macas a los <?= getParamDate($data_head['dato_fecha']) ?> días del mes de <?= getMonthName(getParamDate($data_head['dato_fecha'], 'm')) ?> del año <?= getParamDate($data_head['dato_fecha'], 'y') ?> celebran el presente Contrato de Adhesión de prestación de Servicios de Acceso a Internet; por una parte, el Señor José Andrés Chacha Chuca, a quien mediante resolución del ARCOTEL expedida por la Agencia de Regulación y Control de las Telecomunicaciones otorgó el permiso para la prestación del servicio de acceso a internet, permiso suscrito el 07 de noviembre del 2019 e inscrito en el tomo a fojas 139-13997, del registro público de telecomunicaciones, los datos de detallan a continuación:</p>
         <table class="layout2">
             <tr>
                 <td colspan="3"><b>NOMBRE/ RAZÓN SOCIAL: </b><?= $data_business['razon_social'] ?></td>
@@ -793,8 +793,52 @@ function formatDate($date)
     return date_format($date_type, 'd/m/Y');
 }
 
+//get day from string date in date zone America/Guayaquil
+function getParamDate($date, $param = 'd')
+{
+    $separator = strpos($date, "-") ? "-" : "/";
+    $date = explode($separator, $date);
+    $day = $date[0];
+    $month = $date[1];
+    $year = $date[2];
+    switch ($param) {
+        case 'd':
+            return $day;
+            break;
+        case 'm':
+            return $month;
+            break;
+        case 'y':
+            return $year;
+            break;
+        default:
+            return $day;
+            break;
+    }
+}
 
 
+
+// convertir mes a letras
+function getMonthName($month)
+{
+    $month = (int) $month;
+    $months = [
+        1 => "Enero",
+        2 => "Febrero",
+        3 => "Marzo",
+        4 => "Abril",
+        5 => "Mayo",
+        6 => "Junio",
+        7 => "Julio",
+        8 => "Agosto",
+        9 => "Septiembre",
+        10 => "Octubre",
+        11 => "Noviembre",
+        12 => "Diciembre",
+    ];
+    return strtolower($months[$month]);
+}
 
 /*
 const w1 = "Cuenca y soasti Parroquia Sevilla Sector Palmeras Ciudad sevillas";
