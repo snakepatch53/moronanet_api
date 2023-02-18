@@ -39,7 +39,7 @@ function get_contract_html(
         "ubicacion" => $client_ubicacion, //dato4
         "canton" => "Morona",
         "sector" => $client_sector,
-        "valor_mensual" => round($client_costo + ($client_costo * 0.12)), //dato5
+        "valor_mensual" => $client_costo, //dato5
         "ciudad" => $client_ciudad,
         "telefono" => $client_telefono, //dato6
         "ip" => "",
