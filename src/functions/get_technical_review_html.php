@@ -227,9 +227,12 @@ function getPage1(array $data_head, array $data_header, array $data_business, ar
             <tr>
                 <td><b>Celular:</b></td>
                 <td><?= $data_client['telefono'] ?></td>
-                <td rowspan="3"><b>Ubicacion: </b></td>
                 <td rowspan="3">
-                    <center><img style="width:120px; margin-top:8px" src="data:image/png;base64,<?= qrcode_location($data_client['ubicacion']) ?>" /></center>
+                    <center><img style="width:65px; margin-top:8px" src="data:image/png;base64,<?= qrcode_PPPoE($data_client['ubicacion'], "user") ?>" /></center>
+                    <center><img style="width:65px; margin-top:8px" src="data:image/png;base64,<?= qrcode_PPPoE($data_client['ubicacion'], "pass") ?>" /></center>
+                </td>
+                <td rowspan="3">
+                    <center><img style="width:140px; margin-top:8px" src="data:image/png;base64,<?= qrcode_location($data_client['ubicacion']) ?>" /></center>
                 </td>
             </tr>
             <tr>
