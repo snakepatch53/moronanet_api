@@ -42,6 +42,12 @@ $router->get('/technical_review/{cliente_id}/{pass}', function ($cliente_id, $pa
     include('./src/services/technical_review_api.php');
 });
 
+// POST
+$router->post('/upload_img/{pass}', function ($pass) {
+    include('./src/functions/middleware_auth.php'); //auth
+    include('./src/services/upload_img.php');
+});
+
 $router->set404(function () {
     header('HTTP/1.1 404 Not Found');
     echo "Pagina no encontrada!";
