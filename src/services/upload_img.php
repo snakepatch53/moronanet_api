@@ -9,7 +9,7 @@ if (isset($_POST['name'], $_FILES['img'])) {
     $path = "./public/cloud_img";
     $img = $_FILES['img'];
     $name = $_POST['name'];
-    $link = $_ENV["WEB_DOMAIN"];
+    $link = $_ENV["WEB_DOMAIN"] + "public/cloud_img/";
     // $link = 'http://localhost/moronanet_api/public/cloud_img/';
 
     if ($img['tmp_name'] != "" or $img['tmp_name'] != null) {
