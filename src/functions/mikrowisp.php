@@ -19,17 +19,20 @@ function getClient($cliente_id)
 
 function getPlan(string $str_name)
 {
-    $planes = array(
-        array("num" => "20", "name" => "20 MEGAS"),
-        array("num" => "40", "name" => "40 MEGAS"),
-        array("num" => "60", "name" => "60 MEGAS"),
-        array("num" => "100", "name" => "100 MEGAS"),
-        array("num" => "200", "name" => "200 MEGAS"),
-    );
-    foreach ($planes as $key => $value) {
-        if (str_contains($str_name, $value['num'])) return $value['name'];
-    }
+    preg_match_all('/[0-9]+/', $str_name, $matches);
+    if (count($matches[0]) > 0) return $matches[0][0] . " MEGAS";
     return "Unregistred";
+    // $planes = array(
+    //     array("num" => "20", "name" => "20 MEGAS"),
+    //     array("num" => "40", "name" => "40 MEGAS"),
+    //     array("num" => "60", "name" => "60 MEGAS"),
+    //     array("num" => "100", "name" => "100 MEGAS"),
+    //     array("num" => "200", "name" => "200 MEGAS"),
+    // );
+    // foreach ($planes as $key => $value) {
+    //     if (str_contains($str_name, $value['num'])) return $value['name'];
+    // }
+    // return "Unregistred";
 }
 
 function getField(string $w, array $fields, string $field, $default_field)

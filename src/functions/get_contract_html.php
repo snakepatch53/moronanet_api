@@ -11,6 +11,9 @@ function get_contract_html(
     string $client_ciudad,
     string $client_plan,
     string $client_ubicacion,
+    string $client_nodo,
+    string $servidor_name,
+    string $client_ip,
     string $client_pppuser,
     string $client_ppppass,
     float $client_costo,
@@ -39,6 +42,7 @@ function get_contract_html(
         "parroquia" => $client_parroquia, //dato7
         "plan" => $client_plan, //dato4
         "ubicacion" => $client_ubicacion, //dato4
+        "servidor_name" => $servidor_name,
         "pppuser" => $client_pppuser, //dato4
         "ppppass" => $client_ppppass, //dato4
         "canton" => "Morona",
@@ -46,7 +50,7 @@ function get_contract_html(
         "valor_mensual" => $client_costo, //dato5
         "ciudad" => $client_ciudad,
         "telefono" => $client_telefono, //dato6
-        "ip" => "",
+        "ip" => $client_ip,
     );
 
     $data_business =  array(
@@ -64,15 +68,17 @@ function get_contract_html(
     );
 
     $html = '<html><head><title>' . $data_client['nombres'] . '</title></head><body>';
-    $html .= getPage1($data_head, $data_header, $data_business, $data_client);
+    $html .= getPage1($data_head, $data_header, $data_business, $data_client, $servidor_name);
     $html .= getpage2($data_head);
     $html .= getpage3($data_head, array(
         "plan" => $data_client['plan'],
+        "valor_mensual" => $client_costo,
         "pago_directo" => "si",
         "pago_debito" => "si",
         "pago_locales" => "no",
         "pago_credito" => "no",
         "pago_transferencia" => "si",
+        "servidor_name" => $servidor_name
     ));
     $html .= getpage4($data_head);
     $html .= getpage5($data_head);
@@ -171,7 +177,7 @@ function getHeader(array $data, string $dato_hoja_num)
 #endregion
 
 #region page1
-function getPage1(array $data_head, array $data_header, array $data_business, array $data_client)
+function getPage1(array $data_head, array $data_header, array $data_business, array $data_client, string $servidor_name)
 {
     ob_start();
     // get day from date
@@ -270,11 +276,15 @@ function getPage1(array $data_head, array $data_header, array $data_business, ar
             <tr>
                 <td colspan="3" rowspan="2">¿El abonado es de la tercera edad o discapacitado? (En caso afirmativo,aplica tarifa preferencial de acuerdo al plan del prestador):</td>
                 <td><b>SI: </b></td>
-                <td rowspan="3" style="text-align:center">
-                    <img style="width:65px; margin-top:4px" src="data:image/png;base64,<?= qrcode_PPPoE($data_client['pppuser'], "user") ?>" />
-                    <img style="width:65px; margin-top:4px" src="data:image/png;base64,<?= qrcode_PPPoE($data_client['ppppass'], "pass") ?>" />
-                </td>
-                <td rowspan="3" style="text-align:center">
+
+                <?php if (!str_contains(strtolower($servidor_name), "inalambrico")) { ?>
+                    <td rowspan="3" style="text-align:center">
+                        <img style="width:65px; margin-top:4px" src="data:image/png;base64,<?= qrcode_PPPoE($data_client['pppuser'], "user") ?>" />
+                        <img style="width:65px; margin-top:4px" src="data:image/png;base64,<?= qrcode_PPPoE($data_client['ppppass'], "pass") ?>" />
+                    </td>
+                <?php } ?>
+
+                <td rowspan="3" <?= str_contains(strtolower($servidor_name), "inalambrico") ? "colspan='2'" : "" ?> style="text-align:center">
                     <img style="width:140px; margin-top:4px" src="data:image/png;base64,<?= qrcode_location($data_client['ubicacion']) ?>" />
                 </td>
             </tr>
@@ -305,9 +315,11 @@ function getPage1(array $data_head, array $data_header, array $data_business, ar
                 <td><b>Ciudad: </b></td>
                 <td><?= $data_client['ciudad'] ?></td>
                 <td><b>Telefono: </b></td>
-                <td><?= $data_client['telefono'] ?></td>
-                <td><b>IP: </b></td>
-                <td><?= $data_client['ip'] ?></td>
+                <td <?= !str_contains(strtolower($servidor_name), "inalambrico") ? "colspan='3'" : "" ?>><?= $data_client['telefono'] ?></td>
+                <?php if (str_contains(strtolower($servidor_name), "inalambrico")) { ?>
+                    <td><b>IP: </b></td>
+                    <td><?= $data_client['ip'] ?></td>
+                <?php } ?>
             </tr>
         </table>
     </div>
@@ -408,66 +420,7 @@ function getPage3(array $data_head, array $data)
         <p><b class="title">CLÁUSULA SEGUNDA. - OBJETO, CARACTERISTICAS. - </b> El presente contrato tiene por objeto que LA EMPRESA proporcione a EL ABONADO el acceso a la red de internet conforme a las características pactadas, que debidamente firmados por las partes, son integrantes de este instrumento.</p>
         <p>Las partes aceptan que este instrumento constituya un contrato marco general, y que, en adelante los servicios, cambios en los servicios, y cualquier otra modificación que se implemente; se realizará en los anexos correspondientes, que debidamente firmados por las partes, serán integrantes de este Contrato, y se seguirán las condiciones generales de este instrumento con las especificaciones establecidas.</p>
         <p><b class="title">CLÁUSULA TERCERA. - PRECIO Y FORMA DE PAGO. - </b>El precio acordado por la instalación y puesta en funcionamiento por el Servicio de Acceso a Internet y que es firmado por las partes, es integrante del presente contrato.</p>
-        <table class="layout1">
-            <tr>
-                <td>
-                    <table class="layout2" border=1>
-                        <tr>
-                            <td><b>PLAN</b></td>
-                            <td><b>MEGAS</b></td>
-                            <td><b>COSTO</b></td>
-                        </tr>
-                        <tr>
-                            <td>PLAN BASICO</td>
-                            <td>20 MB</td>
-                            <td>$20.00</td>
-                        </tr>
-                        <tr>
-                            <td>PLAN AVANZADO</td>
-                            <td>40 MB</td>
-                            <td>$25.00</td>
-                        </tr>
-                        <tr>
-                            <td>PLAN PLUS</td>
-                            <td>60 MB</td>
-                            <td>$30.00</td>
-                        </tr>
-                        <tr>
-                            <td>PLAN ULTRA VELOCIDAD</td>
-                            <td>100 MB</td>
-                            <td>$45.00</td>
-                        </tr>
-                        <tr>
-                            <td>PLAN ULTRA VELOCIDAD 4k</td>
-                            <td>200 MB</td>
-                            <td>$65.00</td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                    <table class="layout3" border=1>
-                        <tr>
-                            <td><b style="color:transparent">X</b></td>
-                        </tr>
-                        <tr>
-                            <td><b style="color:transparent">X</b><?= strtolower($data['plan']) == '20 megas' ? 'X' : '' ?></td>
-                        </tr>
-                        <tr>
-                            <td><b style="color:transparent">X</b><?= strtolower($data['plan']) == '40 megas' ? 'X' : '' ?></td>
-                        </tr>
-                        <tr>
-                            <td><b style="color:transparent">X</b><?= strtolower($data['plan']) == '60 megas' ? 'X' : '' ?></td>
-                        </tr>
-                        <tr>
-                            <td><b style="color:transparent">X</b><?= strtolower($data['plan']) == '100 megas' ? 'X' : '' ?></td>
-                        </tr>
-                        <tr>
-                            <td><b style="color:transparent">X</b><?= strtolower($data['plan']) == '200 megas' ? 'X' : '' ?></td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
+        <?= getPlansByServer($data) ?>
         <p>El precio mensual acordado por la prestación del Servicio de Acceso a Internet, es el que corresponde al Plan contratado, y cuyo valor mensual y descripción consta en la tabla anterior, que debidamente firmado por las partes, es integrante del presente contrato.</p>
         <p>El Plan contratado se pagará en mensualidades, pagaderas por el EL ABONADO a LA EMPRESA por mes consumido, dentro de los 5 primeros días de cada mes calendario; previo la entrega de la factura por el servicio contratado. En caso de que, EL ABONADO no cancele los valores hasta el sexto día dentro del mes calendario que se encuentre en curso, LA EMPRESA tiene la facultad de suspender la prestación del servicio en cualquier momento, de no producirse el pago del plan dentro del plazo antes señalado, sin que implique terminación de contrato. <br>EL ABONADO, se compromete con la EMPRESA del servicio a pagar las tarifas o valores mensuales por cada uno de los servicios contratados, y el pago se realizará de la siguiente forma:</p>
         <table class="layout4" border=1>
@@ -697,7 +650,7 @@ function getPage7(array $data_head, array $data_business, array $data_client)
             <tbody>
                 <tr>
                     <td></td>
-                    <td>Metros de Fibra Optica</td>
+                    <td>Metros de <?= str_contains(strtolower($data_client['servidor_name']), "inalambrico") ? "Cable UTP" : "Fibra Óptica" ?></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -705,7 +658,7 @@ function getPage7(array $data_head, array $data_business, array $data_client)
                 </tr>
                 <tr>
                     <td></td>
-                    <td>ONT</td>
+                    <td><?= str_contains(strtolower($data_client['servidor_name']), "inalambrico") ? "Router" : "ONT" ?></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -713,7 +666,7 @@ function getPage7(array $data_head, array $data_business, array $data_client)
                 </tr>
                 <tr>
                     <td></td>
-                    <td>Conectores mecanicos de Fibra Optica</td>
+                    <td><?= str_contains(strtolower($data_client['servidor_name']), "inalambrico") ? "Conectores RJ45" : "Conectores mecanicos de Fibra Optica" ?></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -721,7 +674,7 @@ function getPage7(array $data_head, array $data_business, array $data_client)
                 </tr>
                 <tr>
                     <td></td>
-                    <td><b style="color:transparent">X</b></td>
+                    <td><?= str_contains(strtolower($data_client['servidor_name']), "inalambrico") ? "Antena radioenlace " : "<b style='color:transparent'>X</b>" ?></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -789,6 +742,77 @@ function getPage7(array $data_head, array $data_business, array $data_client)
 }
 #endregion
 
+#region getPlans
+function getPlansByServer($data)
+{
+    $server_name = $data['servidor_name'];
+
+    $planes = [
+        ["name" => "PLAN BASICO", "megas" => "40 MB", "cost" => "$20.00", "checked" => str_contains(strtolower($data['plan']), '40')],
+        ["name" => "PLAN AVANZADO", "megas" => "60 MB", "cost" => "$25.00", "checked" => str_contains(strtolower($data['plan']), '60')],
+        ["name" => "PLAN PLUS", "megas" => "80 MB", "cost" => "$30.00", "checked" => str_contains(strtolower($data['plan']), '80')],
+        ["name" => "PLAN ULTRA VELOCIDAD", "megas" => "150 MB", "cost" => "$45.00", "checked" => str_contains(strtolower($data['plan']), '150')],
+        ["name" => "PLAN ULTRA VELOCIDAD 4k", "megas" => "300 MB", "cost" => "$65.00", "checked" => str_contains(strtolower($data['plan']), '300')],
+    ];
+
+    if (str_contains(strtolower($server_name), 'inalambrico')) {
+        $planes = [
+            ["name" => "PLAN BASICO", "megas" => "6 MB", "cost" => "$20.00", "checked" => str_contains(strtolower($data['plan']), '6')],
+            ["name" => "PLAN MEDIO", "megas" => "7 MB", "cost" => "$25.00", "checked" => str_contains(strtolower($data['plan']), '7')],
+            ["name" => "PLAN AVANZADO", "megas" => "10 MB", "cost" => "$30.00", "checked" => str_contains(strtolower($data['plan']), '10')],
+            ["name" => "PLAN AVANZADO +", "megas" => "15 MB", "cost" => "$40.00", "checked" => str_contains(strtolower($data['plan']), '15')],
+        ];
+    }
+
+    if (str_contains(strtolower($server_name), 'alshi')) {
+        $planes = [
+            ["name" => "PLAN BASICO", "megas" => "20 MB", "cost" => "$20.00", "checked" => str_contains(strtolower($data['plan']), '20')],
+            ["name" => "PLAN AVANZADO", "megas" => "40 MB", "cost" => "$25.00", "checked" => str_contains(strtolower($data['plan']), '40')],
+            ["name" => "PLAN PLUS", "megas" => "60 MB", "cost" => "$30.00", "checked" => str_contains(strtolower($data['plan']), '60')],
+            ["name" => "PLAN ULTRA VELOCIDAD", "megas" => "80 MB", "cost" => "$45.00", "checked" => str_contains(strtolower($data['plan']), '80')],
+            ["name" => "PLAN ULTRA VELOCIDAD 4k", "megas" => "100 MB", "cost" => "$50.00", "checked" => str_contains(strtolower($data['plan']), '100')],
+        ];
+    }
+
+
+    ob_start();
+?>
+    <table class="layout1">
+        <tr>
+            <td>
+                <table class="layout2" border=1>
+                    <tr>
+                        <td><b>PLAN</b></td>
+                        <td><b>MEGAS</b></td>
+                        <td><b>COSTO</b></td>
+                    </tr>
+                    <?php foreach ($planes as $key => $value) { ?>
+                        <tr>
+                            <td><?= $value['name'] ?></td>
+                            <td><?= $value['megas'] ?></td>
+                            <td><?= $value['cost'] ?></td>
+                        </tr>
+                    <?php } ?>
+                </table>
+            </td>
+            <td>
+                <table class="layout3" border=1>
+                    <tr>
+                        <td><b style="color:transparent">X</b></td>
+                    </tr>
+                    <?php foreach ($planes as $key => $value) { ?>
+                        <tr>
+                            <td><b style="color:transparent">X</b><?= $value['checked'] ? 'X' : '' ?></td>
+                        </tr>
+                    <?php } ?>
+                </table>
+            </td>
+        </tr>
+    </table>
+<?php
+    return ob_get_clean();
+}
+#endregion
 
 function addYearToDate($date, $years)
 {

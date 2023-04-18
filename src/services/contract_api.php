@@ -6,6 +6,16 @@ include('./src/functions/http_query.php');
 use Dompdf\Dompdf;
 
 $client = getClient($cliente_id);
+
+
+$client_nodo = $client['servicio']['nodo'];
+$servidor_name = "Administrador GPON Macas (pppoe)";
+if ($client_nodo == 4) $servidor_name = "Administrador Inalambrico MoronaNet";
+if ($client_nodo == 5) $servidor_name = "MORONANET ALSHI GPON";
+
+// var_dump($client);
+// return;
+
 if ($client != false) {
     $address_fields = ["paroquia", "sector", "ciudad"];
     $client_address = $client['direccion_principal'];
@@ -20,6 +30,9 @@ if ($client != false) {
         getField($client_address, $address_fields, "ciudad", "macas"),
         capitalizeStr(getPlan($client['servicio']['perfil'])),
         capitalizeStr($client['servicio']['coordenadas']),
+        $client_nodo,
+        $servidor_name,
+        $client['servicio']['ip'],
         $client['servicio']['pppuser'],
         $client['servicio']['ppppass'],
         $client['servicio']['costo'],
