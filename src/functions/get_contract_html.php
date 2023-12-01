@@ -119,7 +119,7 @@ function getHeader(array $data, string $dato_hoja_num)
         }
 
         .header {
-            margin-top: 45px;
+            margin-top: 75px;
             font-size: 13px;
         }
 
@@ -130,6 +130,7 @@ function getHeader(array $data, string $dato_hoja_num)
         .header .layout1 td {
             margin: 0;
             padding: 0 5px;
+            line-height: 12px;
             /* vertical-align: super; */
         }
 
@@ -145,7 +146,7 @@ function getHeader(array $data, string $dato_hoja_num)
     <div class="header">
         <table class="layout1">
             <tr>
-                <td width="360"></td>
+                <td width="400"></td>
                 <td>
                     <table border=1 class="layout2" width="110">
                         <tr>
@@ -192,7 +193,7 @@ function getPage1(array $data_head, array $data_header, array $data_business, ar
         .page1 .layout2,
         .page1 .layout1 {
             width: 100%;
-            margin-top: 20px;
+            margin-top: 0px;
         }
 
         .page1 .layout3 tr td,
@@ -326,7 +327,7 @@ function getPage2($data_head)
     <style>
         .page2 {
             padding: 0 100px;
-            padding-top: 50px;
+            padding-top: 30px;
         }
 
         .page2 ol {
@@ -335,6 +336,7 @@ function getPage2($data_head)
 
         .page2 li {
             font-size: 13px;
+            text-align: justify;
         }
     </style>
     <div class="page2">
@@ -373,7 +375,7 @@ function getPage3(array $data_head, array $data)
     <style>
         .page3 {
             padding: 0 100px;
-            padding-top: 10px;
+            padding-top: 0px;
         }
 
         .page3 .title {
@@ -551,7 +553,7 @@ function getPage5(array $data_head)
     <style>
         .page5 {
             padding: 0 100px;
-            padding-top: 10px;
+            padding-top: 0px;
         }
 
         .page5 p {
